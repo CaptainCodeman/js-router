@@ -1,0 +1,23 @@
+{
+  "name": "feather-router-matcher-es",
+  "version": "1.0.0",
+  "description": "featherweight url to handler matching",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "build:watch": "rollup -c -w",
+    "map": "source-map-explorer dist/router.min.js"
+  },
+  "author": "Simon Green <simon@captaincodeman.com> (https://github.com/captaincodeman)",
+  "license": "ISC",
+  "devDependencies": {
+    "rollup": "^1.26.5",
+    "rollup-plugin-size": "^0.2.0",
+    "rollup-plugin-terser": "^5.1.2",
+    "rollup-plugin-typescript": "^1.0.1",
+    "typescript": "^3.7.2"
+  },
+  "dependencies": {
+    "tslib": "^1.10.0"
+  }
+}
