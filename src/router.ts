@@ -1,4 +1,11 @@
-type Parsed = [ RegExp, string[] ]
+type Parsed = [RegExp, string[]]
+
+export type Result = {
+    page: any
+    params: { [key: string]: any }
+} | null
+
+export type Matcher = (url: string) => Result
 
 // Parses a URL pattern such as `/users/:id`
 // and builds and returns a regex that can be used to
@@ -28,30 +35,26 @@ const parse = (pattern: string): Parsed => {
             return '([^?]*?)'
         })
 
-    return [ new RegExp('^' + pattern + '(?:\\?([\\s\\S]*))?$'), names ]
+    return [new RegExp('^' + pattern + '(?:\\?([\\s\\S]*))?$'), names]
 }
 
-export default (routes: { [path: string]: any }, fallback: any = null) => {
+export default (routes: { [path: string]: any }): Matcher => {
     // loop through each route we're
     // and build the shell of our
     // route cache.
-    const patterns = Object.keys(routes).map(pattern => ({
-        // ...parsePattern(pattern),
-        page: routes[pattern],
-        pattern,
-    }))
+    const patterns = Object.keys(routes)
 
     const cache: Parsed[] = []
 
     // main result is a function that can be called
     // with the url
-    return (url: string) => {
+    return (url: string): Result => {
         for (let i = 0; i < patterns.length; i++) {
-            const route = patterns[i]
+            const pattern = patterns[i]
 
             let parsed = cache[i]
             if (!parsed) {
-                parsed = parse(route.pattern)
+                parsed = parse(pattern)
                 cache[i] = parsed
             }
 
@@ -63,23 +66,19 @@ export default (routes: { [path: string]: any }, fallback: any = null) => {
                 // reduce our match to an object of named paramaters
                 // we've extracted from the url
                 const params = result.reduce((obj, val, index) => {
-                    if (val) {
+                    if (val !== undefined) {
                         obj[parsed[1][index]] = val
                     }
                     return obj
                 }, {})
 
                 return {
-                    ...route,
-                    url,
+                    page: routes[pattern],
                     params,
                 }
             }
         }
 
-        return fallback && {
-            url,
-            page: fallback,
-        }
+        return null
     }
 }

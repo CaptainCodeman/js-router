@@ -9,12 +9,12 @@ import size from 'rollup-plugin-size';
 const production = !process.env.ROLLUP_WATCH;
 
 export default {
-  input: 'src/index.ts',
+  input: 'src/router.ts',
   output: {
     file: 'dist/router.min.js',
     format: 'esm',
     name: 'router',
-    sourcemap: true,
+    sourcemap: false,
   },
   plugins: [
     typescript({ typescript: require('typescript') }),
@@ -25,10 +25,6 @@ export default {
         pure_getters: true,
         unsafe: true,
       },
-      output: {
-        comments: false,
-        semicolons: false,
-      }
     }),
     production && size(),
   ],

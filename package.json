@@ -1,23 +1,27 @@
 {
   "name": "@captaincodeman/router",
   "version": "1.0.0",
-  "description": "lightweight client-side router",
+  "description": "ultra-lightweight client-side router",
   "main": "index.js",
   "scripts": {
     "build": "rollup -c",
     "build:watch": "rollup -c -w",
+    "test": "mocha --require esm",
+    "test:watch": "mocha --require esm -w",
     "map": "source-map-explorer dist/router.min.js"
   },
   "author": "Simon Green <simon@captaincodeman.com> (https://github.com/captaincodeman)",
   "license": "ISC",
   "devDependencies": {
+    "browser-sync": "^2.26.7",
+    "chai": "^4.2.0",
+    "esm": "^3.2.25",
+    "mocha": "^6.2.2",
     "rollup": "^1.26.5",
     "rollup-plugin-size": "^0.2.0",
     "rollup-plugin-terser": "^5.1.2",
     "rollup-plugin-typescript": "^1.0.1",
+    "tslib": "^1.10.0",
     "typescript": "^3.7.2"
-  },
-  "dependencies": {
-    "tslib": "^1.10.0"
   }
 }
