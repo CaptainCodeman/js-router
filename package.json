@@ -1,7 +1,7 @@
 {
-  "name": "feather-router-matcher-es",
+  "name": "@captaincodeman/router",
   "version": "1.0.0",
-  "description": "featherweight url to handler matching",
+  "description": "lightweight client-side router",
   "main": "index.js",
   "scripts": {
     "build": "rollup -c",
