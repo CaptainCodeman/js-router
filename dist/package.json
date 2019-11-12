@@ -1,6 +1,6 @@
 {
   "name": "@captaincodeman/router",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "ultra-lightweight client-side router",
   "author": "Simon Green <simon@captaincodeman.com> (https://github.com/captaincodeman)",
   "main": "router.min.js",
