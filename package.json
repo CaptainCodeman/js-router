@@ -25,7 +25,7 @@
     "url"
   ],
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c && tsc --declaration",
     "build:watch": "rollup -c -w",
     "test": "mocha --require esm",
     "test:watch": "mocha --require esm -w",

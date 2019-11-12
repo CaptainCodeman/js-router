@@ -1,5 +1,7 @@
 type Parsed = [RegExp, string[]]
 
+export type Routes = { [pattern: string]: any }
+
 export type Result = {
     page: any
     params: { [key: string]: any }
@@ -38,7 +40,7 @@ const parse = (pattern: string): Parsed => {
     return [new RegExp('^' + pattern + '(?:\\?([\\s\\S]*))?$'), names]
 }
 
-export default (routes: { [path: string]: any }): Matcher => {
+export default (routes: Routes): Matcher => {
     // loop through each route we're
     // and build the shell of our
     // route cache.

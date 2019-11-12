@@ -1,3 +1,6 @@
+export declare type Routes = {
+    [pattern: string]: any;
+};
 export declare type Result = {
     page: any;
     params: {
@@ -5,7 +8,5 @@ export declare type Result = {
     };
 } | null;
 export declare type Matcher = (url: string) => Result;
-declare const _default: (routes: {
-    [path: string]: any;
-}) => Matcher;
+declare const _default: (routes: Routes) => Matcher;
 export default _default;
