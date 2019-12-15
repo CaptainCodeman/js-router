@@ -6,9 +6,11 @@
 ![gzipped size](https://badgen.net/badgesize/gzip/CaptainCodeman/js-router/master/dist/router.min.js)
 ![brotli size](https://badgen.net/badgesize/brotli/CaptainCodeman/js-router/master/dist/router.min.js)
 
-An ultra-tiny client-side router for modern pregressive web apps.
+An ultra-tiny client-side router for modern [Progressive Web Apps (PWAs)](https://en.wikipedia.org/wiki/Progressive_web_application) or [Single Page Apps (SPAs)](https://en.wikipedia.org/wiki/Single-page_application).
 
-This tiny module exports a single function that takes an object of url patterns and returns a function that can be called to get the match, based on the url. It's all I need for routing and helps when trying to reduce the size of client apps.
+This tiny module exports a single function, that takes an object of URL patterns and returns a matcher function. The matcher function then can be called to get the match, based on the URL.
+
+It's all I need for routing and helps when trying to reduce the size of client apps.
 
 **routes.js**
 
@@ -27,7 +29,7 @@ export default createMatcher({
 })
 ```
 
-This returns a function that can be called to retrieve the value, along with extracted parameters:
+This returns a function, that can be called to retrieve the value, along with extracted parameters:
 
 **other.js**
 
@@ -54,7 +56,7 @@ routeMatcher('/todos/41237')
 // {
 //   page: todoDetailView,
 //   params: {
-//     id: '47'  
+//     id: '41237'
 //   }
 // }
 
@@ -72,65 +74,70 @@ routeMatcher('/not-a-page')
 // null
 ```
 
-Note that a failed match returns null, allowing you to provide whatever fallback you want (such as a 'page not found' view)
+Note that a failed match returns `null`, allowing you to provide whatever fallback you want (such as a 'page not found' view).
 
-## why is this useful?
+Also note, that `page` will be whatever you provided when you created the route matcher function (i.e. in the example above that is the call to `createMatcher( ... )`). It may be a simple string, a class, an object... It's really up to the rest of your application. Use what serves your app best; the router won't do anything with it (except returning it on a match).
 
-In a Single Page App you'll need to determine what should be displayed based on the current url. Part of the URL will determine the view to show and part will be parameters that determine which data should appear in that view. This package makes it easy to parse and extract both of those.
+## Why is this useful?
 
-If you are using [redux](http://redux.js.org/) for application state then there is a good argument for making the routing system part of that. Decisions such as which data to fetch can then be part of the application state instead of residing in UI components - that can improve performance as data can be pre-fetched to reduce letency instead of waiting for an empty view to load and render before requesting it.
+In a Single Page App you'll need to determine what should be displayed based on the current URL. Part of the URL will determine the view to show and part will be parameters that determine which data should appear in that view. This package makes it easy to parse and extract both of those.
 
-## how parameter extraction works
+If you are using [redux](http://redux.js.org/) for application state, then there is a good argument for making the routing system part of that. Decisions such as which data to fetch can then be part of the application state, instead of residing in UI components. That can improve performance, as data can be pre-fetched to reduce latency, instead of waiting for an empty view to load and render, before requesting the data.
 
-### parameters
+## How parameter extraction works
+
+Let's have a look at how route patterns and params work together.
+
+### Parameters
 
 Use a `:name` format for parameters:
 
-pattern: `'/todos/:id'`
-url: `'/todos/123'`
-extracted params: `{ id: '123' }`
+- pattern: `'/todos/:id'`
+- URL: `'/todos/123'`
+- extracted params: `{ id: '123' }`
 
 Multiple parameters and static segments can be mixed:
 
-pattern: `'/topic/:topic/post/:post'`
-url: `'/topic/123/post/456'`
-extracted params: `{ topic: '123', post: '456' }`
+- pattern: `'/topic/:topic/post/:post'`
+- URL: `'/topic/123/post/456'`
+- extracted params: `{ topic: '123', post: '456' }`
 
 Parameters can be made optional:
 
-pattern: `'/topic/:topic(/post/:post')`
-url: `'/topic/123'`
-extracted params: `{ topic: '123' }`
+- pattern: `'/topic/:topic(/post/:post)'`
+- URL: `'/topic/123'`
+- extracted params: `{ topic: '123' }`
 
-Wildcards capture the remainder of the match into a param called `path`
+Wildcards capture the remainder of the match into a param called `path`:
 
-pattern: `/blog/*`
-url: `'/blog/2019-11-12/how-to-use-client-routing'`
-extracted params: `{ path: '2019-11-12/how-to-use-client-routing' }`
+- pattern: `/blog/*`
+- URL: `'/blog/2019-11-12/how-to-use-client-routing'`
+- extracted params: `{ path: '2019-11-12/how-to-use-client-routing' }`
 
-## notes
+## Notes
 
 Things to be aware of...
 
-1. Order is important, the first match wins
-2. If you re-use parameter names in the url pattern they'll be overwritten in the result.
-3. If you need query string values, match the base url first with this module, then use the browser's built-in [`URLSearchParam`](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) to parse them
+1. Order is important, the first match wins.
+2. If you re-use parameter names in the URL pattern, they'll be overwritten in the result.
+3. If you need query string values, match the base URL first with this module, then use the browser's built-in [`URLSearchParams`](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) to parse them.
+4. Be sure to configure your web server correctly: _All_ requests (that are not static assets / files, like images or style sheets) must be handed to your application, otherwise you may face HTTP 404 (not found) errors generated by the web server, before your app can even ask the router for a match.
 
-## install
+## Install
 
     npm install @captaincodeman/router --save
 
-## credits
+## Credits
 
 This was based on [feather-route-matcher](https://github.com/HenrikJoreteg/feather-route-matcher) by [HenrikJoreteg](https://github.com/HenrikJoreteg) which itself borrows a few extremely well-tested regexes from Backbone.js to do its pattern matching. I converted it to TypeScript, fixed a couple of quirks with pattern matching and shaved off a few bytes from the size. Thanks for the generous licensing!
 
-## building
+## Building
 
-Build library using
+Build the library using
 
     npm run build
 
-## tests
+## Tests
 
 Run unit tests using
 
