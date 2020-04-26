@@ -1,13 +1,13 @@
 type Parsed = [RegExp, string[]]
 
-export type Routes = { [pattern: string]: any }
+export type Routes<T> = { [pattern: string]: T }
 
-export type Result = {
-    page: any
+export type Result<T> = {
+    page: T
     params: { [key: string]: any }
 } | null
 
-export type Matcher = (url: string) => Result
+export type Matcher<T> = (url: string) => Result<T>
 
 // Parses a URL pattern such as `/users/:id`
 // and builds and returns a regex that can be used to
@@ -40,7 +40,7 @@ const parse = (pattern: string): Parsed => {
     return [new RegExp('^' + pattern + '(?:\\?([\\s\\S]*))?$'), names]
 }
 
-export default (routes: Routes): Matcher => {
+export default <T>(routes: Routes<T>): Matcher<T> => {
     // loop through each route we're
     // and build the shell of our
     // route cache.
@@ -50,7 +50,7 @@ export default (routes: Routes): Matcher => {
 
     // main result is a function that can be called
     // with the url
-    return (url: string): Result => {
+    return (url: string): Result<T> => {
         for (let i = 0; i < patterns.length; i++) {
             const pattern = patterns[i]
 
