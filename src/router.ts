@@ -41,7 +41,7 @@ export type Matcher<T> = (url: string) => Result<T>
 // other maintainers of Backbone.js
 //
 // It has been modified for extraction of
-// named paramaters from the URL
+// named parameters from the URL
 const parse = (pattern: string): Parsed => {
     const names: string[] = []
 
@@ -94,7 +94,7 @@ export default <T>(routes: Routes<T>): Matcher<T> => {
             if (match) {
                 const result = match.slice(1, -1)
 
-                // reduce our match to an object of named paramaters
+                // reduce our match to an object of named parameters
                 // we've extracted from the url
                 const params = result.reduce((obj, val, index) => {
                     if (val !== undefined) {
