@@ -9,7 +9,7 @@
       "noUnusedParameters": true,
       "noUnusedLocals": true,
       "noImplicitReturns": true,
-      "noImplicitAny": false,
+      "noImplicitAny": true,
       "noEmitHelpers": true,
       "lib": [
         "esnext",

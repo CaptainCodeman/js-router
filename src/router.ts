@@ -96,7 +96,7 @@ export default <T>(routes: Routes<T>): Matcher<T> => {
 
                 // reduce our match to an object of named parameters
                 // we've extracted from the url
-                const params = result.reduce((obj, val, index) => {
+                const params = result.reduce((obj: any, val, index) => {
                     if (val !== undefined) {
                         obj[parsed[1][index]] = val
                     }
