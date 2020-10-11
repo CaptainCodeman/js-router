@@ -3,9 +3,14 @@
   "version": "1.0.1",
   "description": "ultra-lightweight client-side router",
   "author": "Simon Green <simon@captaincodeman.com> (https://github.com/captaincodeman)",
-  "main": "router.min.js",
-  "module": "router.js",
-  "types": "router.d.ts",
+  "main": "lib/router.js",
+  "module": "lib/router.js",
+  "types": "types/router.d.ts",
+  "sideEffects": false,
+  "files": [
+    "lib/**",
+    "types/**"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/CaptainCodeman/js-router"
@@ -25,21 +30,20 @@
     "url"
   ],
   "scripts": {
-    "build": "rollup -c && tsc --declaration",
+    "build": "rollup -c",
     "build:watch": "rollup -c -w",
     "test": "mocha --require esm",
     "test:watch": "mocha --require esm -w",
-    "mypublish:pre": "npm run build && npm run test && cp readme.md package.json dist",
-    "mypublish": "npm run mypublish:pre && npm publish dist --tag latest --access=public"
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
+    "@rollup/plugin-typescript": "^6.0.0",
     "chai": "^4.2.0",
     "esm": "^3.2.25",
-    "mocha": "^6.2.2",
-    "rollup": "^1.27.14",
-    "rollup-plugin-terser": "^5.1.3",
-    "rollup-plugin-typescript": "^1.0.1",
-    "tslib": "^1.10.0",
-    "typescript": "^3.7.4"
+    "mocha": "^8.1.3",
+    "rollup": "^2.29.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "tslib": "^2.0.3",
+    "typescript": "^4.0.3"
   }
 }

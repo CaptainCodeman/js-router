@@ -1,4 +1,4 @@
-import createMatcher from '../dist/router.min.js'
+import createMatcher from '../lib/router.js'
 import { expect } from 'chai'
 
 describe('routing', function() {

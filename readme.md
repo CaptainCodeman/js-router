@@ -2,9 +2,9 @@
 
 ![typescript](https://badgen.net/badge/icon/typescript?icon=typescript&label)
 ![types included](https://badgen.net/npm/types/tslib)
-![normal size](https://badgen.net/badgesize/normal/CaptainCodeman/js-router/master/dist/router.min.js)
-![gzipped size](https://badgen.net/badgesize/gzip/CaptainCodeman/js-router/master/dist/router.min.js)
-![brotli size](https://badgen.net/badgesize/brotli/CaptainCodeman/js-router/master/dist/router.min.js)
+![normal size](https://badgen.net/badgesize/normal/CaptainCodeman/js-router/master/lib/router.js)
+![gzipped size](https://badgen.net/badgesize/gzip/CaptainCodeman/js-router/master/lib/router.js)
+![brotli size](https://badgen.net/badgesize/brotli/CaptainCodeman/js-router/master/lib/router.js)
 
 An ultra-tiny client-side router for modern [Progressive Web Apps (PWAs)](https://en.wikipedia.org/wiki/Progressive_web_application) or [Single Page Apps (SPAs)](https://en.wikipedia.org/wiki/Single-page_application).
 
