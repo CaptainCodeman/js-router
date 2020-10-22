@@ -8,9 +8,12 @@
   "types": "types/router.d.ts",
   "sideEffects": false,
   "files": [
-    "lib/**",
-    "types/**"
+    "lib",
+    "types"
   ],
+  "exports": {
+    ".": "./lib/router.js"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/CaptainCodeman/js-router"
@@ -32,12 +35,13 @@
   "scripts": {
     "build": "rollup -c",
     "build:watch": "rollup -c -w",
-    "test": "mocha --require esm",
+    "test": "mocha --require esm && package-check",
     "test:watch": "mocha --require esm -w",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^6.0.0",
+    "@skypack/package-check": "^0.1.0",
     "chai": "^4.2.0",
     "esm": "^3.2.25",
     "mocha": "^8.1.3",
